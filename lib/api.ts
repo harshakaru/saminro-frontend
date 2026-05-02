@@ -53,15 +53,15 @@ export type UpdateInquiryStatusData = {
 // ── Inquiry API ──
 export const inquiryApi = {
   create: (data: CreateInquiryData) =>
-    request<Inquiry>("/api/inquiries", {
+    request<Inquiry>("/inquiries", {
       method: "POST",
       body: JSON.stringify(data),
     }),
 
-  getAll: () => request<Inquiry[]>("/api/inquiries"),
+  getAll: () => request<Inquiry[]>("/inquiries"),
 
   updateStatus: (id: string, data: UpdateInquiryStatusData) =>
-    request<Inquiry>(`/api/inquiries/${id}/status`, {
+    request<Inquiry>(`/inquiries/${id}/status`, {
       method: "PATCH",
       body: JSON.stringify(data),
     }),
