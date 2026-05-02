@@ -5,6 +5,7 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
 import { Toaster } from "@/components/ui/sonner"
+import { QueryProvider } from "@/components/query-provider"
 
 const figtree = Figtree({ subsets: ["latin"], variable: "--font-sans" })
 
@@ -44,7 +45,9 @@ export default function RootLayout({
     >
       <body>
         <ThemeProvider defaultTheme="light" enableSystem={false}>
-          {children}
+          <QueryProvider>
+            {children}
+          </QueryProvider>
         </ThemeProvider>
         <Toaster position="bottom-right" richColors duration={3000} closeButton />
       </body>

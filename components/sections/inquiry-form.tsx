@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { toast } from "sonner"
+import { useCreateInquiry } from "@/hooks/use-inquiries"
 import { cn } from "@/lib/utils"
 import { inquirySchema, type InquiryFormData } from "@/lib/schemas/inquiry"
 import { Button } from "@/components/ui/button"
@@ -24,10 +25,12 @@ const contactInfo = [
 export function InquiryForm() {
   const sectionRef = useRef<HTMLElement>(null)
   const [visible, setVisible] = useState(false)
-  const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm<InquiryFormData>({
+  const { register, handleSubmit, reset, formState: { errors } } = useForm<InquiryFormData>({
     resolver: zodResolver(inquirySchema),
     defaultValues: { name: "", email: "", phone: "", message: "" },
   })
+
+  const createInquiry = useCreateInquiry()
 
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => { if (entry.isIntersecting) setVisible(true) }, { threshold: 0.1 })
@@ -35,15 +38,16 @@ export function InquiryForm() {
     return () => observer.disconnect()
   }, [])
 
-  const onSubmit = async (data: InquiryFormData) => {
-    try {
-      console.log("Inquiry submitted:", data)
-      await new Promise((resolve) => setTimeout(resolve, 1000))
-      toast.success("Inquiry sent successfully!", { description: "We'll get back to you within 24 hours." })
-      reset()
-    } catch {
-      toast.error("Failed to send inquiry", { description: "Please try again or contact us directly." })
-    }
+  const onSubmit = (data: InquiryFormData) => {
+    createInquiry.mutate(data, {
+      onSuccess: () => {
+        toast.success("Inquiry sent successfully!", { description: "We'll get back to you within 24 hours." })
+        reset()
+      },
+      onError: (error) => {
+        toast.error("Failed to send inquiry", { description: error.message || "Please try again or contact us directly." })
+      },
+    })
   }
 
   return (
@@ -105,8 +109,8 @@ export function InquiryForm() {
                   <Textarea id="inquiry-message" placeholder="Tell us about your travel plans, preferred dates, or any special requests..." className="min-h-32" aria-invalid={!!errors.message} {...register("message")} />
                   {errors.message && <FieldError>{errors.message.message}</FieldError>}
                 </Field>
-                <Button type="submit" size="lg" disabled={isSubmitting} className="w-full bg-gold text-white hover:bg-gold-dark border-gold/50 md:w-auto md:min-w-[200px]">
-                  {isSubmitting ? (<><Spinner className="mr-2" />Sending...</>) : "Send Inquiry"}
+                <Button type="submit" size="lg" disabled={createInquiry.isPending} className="w-full bg-gold text-white hover:bg-gold-dark border-gold/50 md:w-auto md:min-w-[200px]">
+                  {createInquiry.isPending ? (<><Spinner className="mr-2" />Sending...</>) : "Send Inquiry"}
                 </Button>
               </FieldGroup>
             </form>
