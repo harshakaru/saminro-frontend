@@ -58,7 +58,7 @@ export function Footer() {
               <li>123 Paradise Avenue</li>
               <li>Saminro City, SC 10001</li>
               <li className="pt-2">hello@saminrohotel.com</li>
-              <li>+1 (555) 123-4567</li>
+              <li>+94 11 234 5678</li>
             </ul>
           </div>
 

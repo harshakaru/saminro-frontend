@@ -18,7 +18,7 @@ import { Mail01Icon, Call02Icon, Location01Icon, Clock01Icon } from "@hugeicons/
 const contactInfo = [
   { icon: Location01Icon, label: "Address", value: "123 Paradise Avenue, Saminro City" },
   { icon: Mail01Icon, label: "Email", value: "hello@saminrohotel.com" },
-  { icon: Call02Icon, label: "Phone", value: "+1 (555) 123-4567" },
+  { icon: Call02Icon, label: "Phone", value: "+94 11 234 5678" },
   { icon: Clock01Icon, label: "Reception", value: "24 hours, 7 days a week" },
 ]
 
@@ -77,10 +77,16 @@ export function InquiryForm() {
               ))}
             </div>
             <div className="relative aspect-video overflow-hidden rounded-xl lg:aspect-[4/3]">
-              <div className="placeholder-gradient-4 absolute inset-0" />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-xs tracking-[0.15em] text-white/50 uppercase">Map — replace with embed</span>
-              </div>
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d37675.590762939464!2d79.92570719695875!3d6.990586648823219!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae257daa7afab33%3A0x39fcd67ba9b759d6!2sSaminro%20Grand%20Palace!5e0!3m2!1sen!2slk!4v1777706732547!5m2!1sen!2slk"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="absolute inset-0"
+              />
             </div>
           </div>
 
@@ -101,7 +107,7 @@ export function InquiryForm() {
                 </div>
                 <Field>
                   <FieldLabel htmlFor="inquiry-phone">Phone Number</FieldLabel>
-                  <Input id="inquiry-phone" type="tel" placeholder="+1 (555) 123-4567" aria-invalid={!!errors.phone} {...register("phone")} />
+                  <Input id="inquiry-phone" type="tel" placeholder="+94 11 234 5678" aria-invalid={!!errors.phone} {...register("phone")} />
                   {errors.phone && <FieldError>{errors.phone.message}</FieldError>}
                 </Field>
                 <Field>

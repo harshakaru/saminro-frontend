@@ -1,38 +1,34 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
+import Image from "next/image"
 import { cn } from "@/lib/utils"
 
 const galleryItems = [
   {
-    gradient: "placeholder-gradient-1",
+    image: "/gallery-1.jpg",
     label: "Hotel lobby",
     span: "md:col-span-2 md:row-span-2",
   },
   {
-    gradient: "placeholder-gradient-2",
+    image: "/gallery-2.jpg",
     label: "Restaurant",
     span: "",
   },
   {
-    gradient: "placeholder-gradient-3",
+    image: "/gallery-3.jpg",
     label: "Pool area",
     span: "",
   },
   {
-    gradient: "placeholder-gradient-4",
+    image: "/gallery-4.jpg",
     label: "Suite interior",
     span: "",
   },
   {
-    gradient: "placeholder-gradient-5",
-    label: "Spa",
-    span: "",
-  },
-  {
-    gradient: "placeholder-gradient-6",
+    image: "/gallery-6.jpg",
     label: "Garden view",
-    span: "md:col-span-2",
+    span: "",
   },
 ]
 
@@ -94,17 +90,17 @@ export function Gallery() {
                   : "opacity-0"
               )}
             >
-              <div
-                className={cn(
-                  "absolute inset-0 transition-transform duration-700 group-hover:scale-110",
-                  item.gradient
-                )}
+              <Image
+                src={item.image}
+                alt={item.label}
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-110"
               />
               {/* Hover overlay */}
               <div className="absolute inset-0 bg-black/0 transition-all duration-500 group-hover:bg-black/30" />
               <div className="absolute inset-0 flex items-end p-4 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
                 <span className="text-xs font-medium tracking-wider text-white uppercase">
-                  {item.label} — replace with image
+                  {item.label}
                 </span>
               </div>
             </div>

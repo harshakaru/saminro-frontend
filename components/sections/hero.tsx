@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { HugeiconsIcon } from "@hugeicons/react"
 import { ArrowDown01Icon } from "@hugeicons/core-free-icons"
@@ -18,8 +19,14 @@ export function Hero() {
       id="hero"
       className="relative flex min-h-svh items-center justify-center overflow-hidden"
     >
-      {/* Placeholder background – replace with real image */}
-      <div className="placeholder-gradient-hero absolute inset-0" />
+      {/* Hero background image */}
+      <Image
+        src="/hero-cover.jpg"
+        alt="Saminro Hotel"
+        fill
+        priority
+        className="object-cover object-center"
+      />
 
       {/* Subtle overlay */}
       <div className="absolute inset-0 bg-black/30" />
@@ -50,14 +57,6 @@ export function Hero() {
             className="bg-gold text-white hover:bg-gold-dark border-gold/50 min-w-[160px]"
           >
             Make an Inquiry
-          </Button>
-          <Button
-            variant="outline"
-            size="lg"
-            onClick={scrollToAbout}
-            className="border-white/20 bg-white/5 text-white backdrop-blur-sm hover:bg-white/15 hover:text-white min-w-[160px]"
-          >
-            Explore
           </Button>
         </div>
       </div>

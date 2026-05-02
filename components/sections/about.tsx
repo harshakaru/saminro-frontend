@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
+import Image from "next/image"
 import { cn } from "@/lib/utils"
 
 export function About() {
@@ -39,12 +40,15 @@ export function About() {
               visible ? "animate-fade-in-up" : "opacity-0"
             )}
           >
-            <div className="placeholder-gradient-1 absolute inset-0" />
+            <Image
+              src="/our-story.jpg"
+              alt="Saminro Hotel exterior"
+              fill
+              className="object-cover"
+              priority
+            />
             {/* Decorative frame */}
-            <div className="absolute inset-4 rounded-xl border border-white/10" />
-            <div className="absolute bottom-6 left-6 right-6 text-xs tracking-[0.2em] text-white/40 uppercase">
-              Hotel exterior — replace with image
-            </div>
+            <div className="absolute inset-4 rounded-xl border-2 border-white/10" />
           </div>
 
           {/* Text content */}

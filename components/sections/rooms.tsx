@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
+import Image from "next/image"
 import {
   Card,
   CardContent,
@@ -18,7 +19,7 @@ const rooms = [
       "Elegantly appointed with panoramic views, plush furnishings, and a private balcony that invites the beauty of the surrounding landscape into your personal retreat.",
     size: "35 m²",
     price: "From $180/night",
-    gradient: "placeholder-gradient-1",
+    image: "/deluxe-room.jpg",
   },
   {
     name: "Premium Suite",
@@ -26,7 +27,7 @@ const rooms = [
       "A spacious haven featuring a separate living area, luxurious bath amenities, and floor-to-ceiling windows that frame the breathtaking scenery beyond.",
     size: "55 m²",
     price: "From $320/night",
-    gradient: "placeholder-gradient-2",
+    image: "/premium-room.jpg",
   },
   {
     name: "Royal Villa",
@@ -34,7 +35,7 @@ const rooms = [
       "The pinnacle of luxury living with a private terrace, infinity plunge pool, dedicated butler service, and bespoke interiors crafted for the discerning traveler.",
     size: "95 m²",
     price: "From $580/night",
-    gradient: "placeholder-gradient-3",
+    image: "/royal-room.jpg",
   },
 ]
 
@@ -101,15 +102,12 @@ export function Rooms() {
             >
               {/* Image placeholder */}
               <div className="relative aspect-[4/3] overflow-hidden">
-                <div
-                  className={cn(
-                    "absolute inset-0 transition-transform duration-700 group-hover:scale-105",
-                    room.gradient
-                  )}
+                <Image
+                  src={room.image}
+                  alt={room.name}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute bottom-3 left-3 text-[0.6rem] tracking-[0.15em] text-white/40 uppercase">
-                  Room image — replace
-                </div>
                 <div className="absolute top-4 right-4 rounded-full bg-white/15 px-3 py-1 text-xs font-medium text-white backdrop-blur-md">
                   {room.size}
                 </div>
